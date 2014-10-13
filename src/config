@@ -1,0 +1,29 @@
+#!/bin/sh
+
+CFLAGS="$CFLAGS \
+     \
+    -DWITH_PCRE_STUDY -DMODSEC_PCRE_MATCH_LIMIT=1500 -DMODSEC_PCRE_MATCH_LIMIT_RECURSION=1500  -DREQUEST_EARLY          \
+     \
+    "
+
+
+CORE_LIBS="$CORE_LIBS \
+    -L/usr/lib/x86_64-linux-gnu -lcurl -Wl,-Bsymbolic-functions -Wl,-z,relro \
+    -L/usr/lib/x86_64-linux-gnu -lxml2 \
+     \
+    -L/usr/lib/x86_64-linux-gnu -lpcre \
+    -L/usr/lib  -lm -L/usr/lib/x86_64-linux-gnu -lpcre \
+    "
+
+ngx_addon_name=ngx_http_another_modsecurity
+
+CORE_MODULES="$CORE_MODULES ngx_pool_context_module"
+
+HTTP_AUX_FILTER_MODULES="ngx_http_modsecurity $HTTP_AUX_FILTER_MODULES"
+
+NGX_ADDON_SRCS="$NGX_ADDON_SRCS \
+		$ngx_addon_dir/ngx_http_ams.c \
+		$ngx_addon_dir/ngx_ams_engine_var.c
+
+NGX_ADDON_DEPS="$NGX_ADDON_DEPS \
+		$ngx_addon_dir/ngx_ams_engine_var.h
