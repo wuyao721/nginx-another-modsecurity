@@ -1,3 +1,9 @@
+
+ams_rule_var_t ams_rule_vars[] = {
+    AMS_RULE_VAR(ARGS, COLLECTION)
+    AMS_RULE_NULL_VAR
+}
+
 int ngx_ams_rule_var_parse(ngx_array_t *vars, ngx_str_t *string)
 {
     ams_rule_t *rule;
@@ -27,3 +33,4 @@ int ngx_ams_rule_var_parse(ngx_array_t *vars, ngx_str_t *string)
     }
     return NGN_OK;
 }
+
