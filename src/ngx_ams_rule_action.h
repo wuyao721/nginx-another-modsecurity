@@ -12,7 +12,17 @@ struct ams_rule_action_s{
     ngx_array_t *datas;
 };
 
+struct ams_rule_action_cooked_s{
+    ngx_str_t name;
+    int type;
+    ams_rule_action action;
+    ngx_str_t *data;
+    ngx_array_t *datas;
+};
+
 typedef struct ams_rule_action_s ams_rule_action_t;
+typedef struct ams_rule_action_cooked_s ams_rule_action_cooked_t;
+
 typedef void (*ams_rule_action)(ams_rule_t *areq, void *data);
 
 #define AMS_RULE_NULL_ACTION  { ngx_null_string, NULL }
